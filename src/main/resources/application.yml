@@ -1,0 +1,54 @@
+#这是yml配置文件写法,分层次的写配置信息
+#这是Springboot内嵌的Tomcat的端口号,默认是8080
+server:
+ port: 8080
+ address: 0.0.0.0
+
+#定义对象/map集合
+user:
+ name: zhangsan
+ age: 18
+ password: 123456
+
+
+#定义数组/List/Set集合
+hobby:
+ - java
+ - game
+ - sport
+
+
+#用yml配置Mybatis数据库连接信息
+spring:
+  datasource:
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   url: jdbc:mysql://localhost:3306/tlias?useUnicode=true&characterEncoding=utf-8
+   username: root
+   password: 123456
+
+ #在SpringBoot中，文件上传，默认单个文件允许最大大小为1M，可以进行以下配置
+  servlet:
+   multipart:
+    max-file-size: 10MB  #配置单个文件最大上传大小
+    max-request-size: 100MB  #配置单个请求最大上传大小(一次请求可以上传多个文件)
+
+##开启mybatis的驼峰命名自动映射开关  a_cloumn(数据库字段) ---自动封装---> aColumn(属性名字)
+mybatis:
+ configuration:
+  map-underscore-to-camel-case: true
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#spring事务管理日志
+logging:
+ level:
+  org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+
+#配置优先级 程序实参>虚拟机选项>properties>yml>yaml
+#程序实参配置端口号--eg: --server.port=9000
+#虚拟机配置端口号--eg: -Dserver.port=9000
+
+
+
+
+

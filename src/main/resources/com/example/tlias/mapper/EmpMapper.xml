@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+XML映射文件的名称与Mapper接口名称一致，并且将XML映射文件和Mapper接口放置在相同包下(同包同名)。
+XML映射文件的namespace属性为Mapper接口全限定名一致。
+XML映射文件中sql语句的id与Mapper接口中的方法名一致，并保持返回类型一致。
+-->
+<mapper namespace="com.example.tlias.mapper.EmpMapper">
+
+
+
+    <!--    条件分页查询动态sql语句-->
+   <select id="selectPage" resultType="com.example.tlias.pojo.Emp">
+       select * from emp
+        <where>
+
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+
+            <if test="gender != null">
+                    and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+            order by update_time asc
+   </select>
+
+
+
+    <!--    collection:遍历的集合
+            item:遍历出来的元素
+            separator:每次遍历出来的元素用什么分隔
+            open:遍历开始前拼接的sql片段
+            close:遍历结束后拼接的sql片段-->
+    <delete id="deleteByIds">
+    delete from emp where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+    </foreach>
+    </delete>
+
+
+    <update id="updateEmp">
+        update emp
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

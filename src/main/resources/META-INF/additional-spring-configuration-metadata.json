@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "include",
+      "type": "java.lang.String",
+      "description": "Description for include."
+    },
+    {
+      "name": "include",
+      "type": "java.lang.String",
+      "description": "Description for include."
+    },
+    {
+      "name": "management.endpoints.web.exposure.include",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoints.web.exposure.include."
+    },
+    {
+      "name": "endpoints.default.enabled",
+      "type": "java.lang.String",
+      "description": "Description for endpoints.default.enabled."
+    }
+  ] }
